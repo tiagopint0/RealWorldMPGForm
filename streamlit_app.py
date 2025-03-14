@@ -1,6 +1,12 @@
 import streamlit as st
+import pandas as pd
 
-st.title("🎈 My new app")
+st.title("Real World Fuel Consumption")
 st.write(
-    "Let's start building! For help and inspiration, head over to [docs.streamlit.io](https://docs.streamlit.io/)."
+    "For help and inspiration, head over to [docs.streamlit.io](https://docs.streamlit.io/)."
 )
+
+conn = st.connection("snowflake")
+df = conn.query("SELECT * FROM CAR_MODELS;", ttl="10m")
+
+st.write(df)
